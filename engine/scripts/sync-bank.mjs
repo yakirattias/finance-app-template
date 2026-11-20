@@ -32,7 +32,8 @@ async function main() {
     console.log(`Skipping scheduled run (Israel ${now.day} ${now.hour}:00).`);
     return;
   }
-  if (!APPLY_ONLY && !ACTIVE.length && !problems.length) throw new Error("No accounts configured. Add the BANK_CREDENTIALS secret (the app's 'חיבור כרטיסים ובנקים' screen builds it).");
+  // a fresh repo with no cards connected yet: nothing to do, and not an error (no failure emails)
+  if (!APPLY_ONLY && !ACTIVE.length && !problems.length) { console.log("No accounts connected yet — connect them in the app: הגדרות ← חיבור כרטיסים ובנקים."); return; }
 
   let scraped;
   if (APPLY_ONLY) {
