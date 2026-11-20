@@ -1,0 +1,33 @@
+# Daily transaction update for YOUR data repo. Nothing to edit here:
+# the work is done by the shared engine, so improvements arrive by themselves.
+name: עדכון עסקאות
+
+on:
+  # 09:00 Israel time (GitHub cron is UTC: 06:00 in summer, 07:00 in winter; the engine skips the early one)
+  schedule:
+    - cron: "0 6 * * *"
+    - cron: "0 7 * * *"
+  # the "עדכון עסקאות" button in the app
+  workflow_dispatch:
+    inputs:
+      providers:
+        description: "Which accounts (all, or e.g. visaCal,max)"
+        required: false
+        default: "all"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bank-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    # the template itself has no data to sync
+    if: github.repository != 'yakirattias/finance-app-template'
+    uses: yakirattias/finance-app-template/.github/workflows/engine.yml@main
+    with:
+      providers: ${{ github.event.inputs.providers || 'all' }}
+    secrets:
+      BANK_CREDENTIALS: ${{ secrets.BANK_CREDENTIALS }}

@@ -1,0 +1,12 @@
+{
+  "name": "finance-sync-engine",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "israeli-bank-scrapers": "6.9.0"
+  },
+  "scripts": {
+    "sync": "node scripts/sync-bank.mjs",
+    "test": "node --test scripts/merge.test.mjs"
+  }
+}

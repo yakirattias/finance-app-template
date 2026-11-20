@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "updatedAt": "2026-01-01T00:00:00.000Z",
+  "profile": {
+    "name": ""
+  },
+  "payslips": [],
+  "groups": [
+    {
+      "id": "home",
+      "name": "בית",
+      "icon": "home",
+      "color": "#8FD3FF",
+      "kind": "fixed"
+    },
+    {
+      "id": "car",
+      "name": "רכב",
+      "icon": "car",
+      "color": "#FFB88C",
+      "kind": "fixed"
+    },
+    {
+      "id": "fixed",
+      "name": "הוצאות קבועות",
+      "icon": "pin",
+      "color": "#C9B8FF",
+      "kind": "fixed"
+    },
+    {
+      "id": "fun",
+      "name": "בילויים ואוכל",
+      "icon": "food",
+      "color": "#FF9FB5",
+      "kind": "variable"
+    },
+    {
+      "id": "giving",
+      "name": "תרומות",
+      "icon": "heart",
+      "color": "#FFE36E",
+      "kind": "fixed"
+    },
+    {
+      "id": "invest",
+      "name": "חיסכון והשקעות",
+      "icon": "chart",
+      "color": "#7FE3B8",
+      "kind": "saving"
+    },
+    {
+      "id": "travel",
+      "name": "חו״ל וחופשות",
+      "icon": "plane",
+      "color": "#8BE0E8",
+      "kind": "variable"
+    }
+  ],
+  "budget": [
+    {
+      "id": "s1",
+      "group": "home",
+      "name": "שכירות / משכנתא",
+      "amount": 0
+    },
+    {
+      "id": "s2",
+      "group": "home",
+      "name": "חשמל, מים, ארנונה, גז",
+      "amount": 0
+    },
+    {
+      "id": "s3",
+      "group": "home",
+      "name": "ועד בית",
+      "amount": 0
+    },
+    {
+      "id": "s4",
+      "group": "home",
+      "name": "סלולר ואינטרנט",
+      "amount": 0
+    },
+    {
+      "id": "s5",
+      "group": "car",
+      "name": "החזר רכב",
+      "amount": 0,
+      "linked": "carLoan"
+    },
+    {
+      "id": "s6",
+      "group": "car",
+      "name": "ביטוח רכב",
+      "amount": 0,
+      "linked": "carInsurance"
+    },
+    {
+      "id": "s7",
+      "group": "car",
+      "name": "אגרת רישוי",
+      "amount": 0,
+      "linked": "carLicense"
+    },
+    {
+      "id": "s8",
+      "group": "car",
+      "name": "דלק / טעינה",
+      "amount": 0,
+      "linked": "carGas"
+    },
+    {
+      "id": "s9",
+      "group": "fixed",
+      "name": "קופת חולים",
+      "amount": 0
+    },
+    {
+      "id": "s10",
+      "group": "fixed",
+      "name": "ביטוחים",
+      "amount": 0
+    },
+    {
+      "id": "s11",
+      "group": "fixed",
+      "name": "מנויים",
+      "amount": 0
+    },
+    {
+      "id": "s12",
+      "group": "fixed",
+      "name": "תספורת וטיפוח",
+      "amount": 0
+    },
+    {
+      "id": "s13",
+      "group": "fun",
+      "name": "סופר ובית",
+      "amount": 0
+    },
+    {
+      "id": "s14",
+      "group": "fun",
+      "name": "מסעדות ומשלוחים",
+      "amount": 0
+    },
+    {
+      "id": "s15",
+      "group": "fun",
+      "name": "בילויים, קניות, מסיבות",
+      "amount": 0
+    },
+    {
+      "id": "s16",
+      "group": "giving",
+      "name": "תרומות",
+      "amount": 0
+    },
+    {
+      "id": "s17",
+      "group": "invest",
+      "name": "חיסכון חודשי",
+      "amount": 0
+    },
+    {
+      "id": "s18",
+      "group": "travel",
+      "name": "חופשות ונסיעות",
+      "amount": 0
+    }
+  ],
+  "car": {
+    "price": 0,
+    "equity": 0,
+    "months": 36,
+    "insurancePerYear": 0,
+    "licensePerYear": 0,
+    "gasPerMonth": 0
+  },
+  "goals": [
+    {
+      "id": "g1",
+      "name": "קרן חירום (3 חודשי הוצאות)",
+      "target": 30000,
+      "saved": 0,
+      "icon": "shield"
+    }
+  ],
+  "assets": [],
+  "transactions": [],
+  "settings": {
+    "returnRate": 5,
+    "starter": true,
+    "migdalFixed": true,
+    "assetLinksV2": true,
+    "goalsLinked": true,
+    "recurringSeeded": true,
+    "playfulV1": true,
+    "travelAdded": true,
+    "carLicenseAdded": true,
+    "carRelinked": true
+  }
+}

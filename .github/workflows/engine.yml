@@ -1,0 +1,73 @@
+# The shared sync engine. Every user's data repo calls this file (@main), so fixes and new
+# banks reach everyone automatically. It runs inside the caller's repo, with the caller's
+# secrets and permissions: credentials never leave that user's own GitHub account.
+name: engine
+
+on:
+  workflow_call:
+    inputs:
+      providers:
+        type: string
+        required: false
+        default: "all"
+    secrets:
+      BANK_CREDENTIALS:
+        required: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout your data
+        uses: actions/checkout@v4
+
+      - name: Checkout the engine
+        uses: actions/checkout@v4
+        with:
+          repository: yakirattias/finance-app-template
+          ref: main
+          path: _engine
+          sparse-checkout: engine
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Ubuntu 24.04 runners block Chrome's sandbox by default
+      - name: Allow headless Chrome
+        run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+
+      - name: Install (exact, locked versions)
+        working-directory: _engine/engine
+        run: npm ci --no-audit --no-fund
+
+      - name: Sync transactions
+        env:
+          DATA_FILE: ${{ github.workspace }}/data/budget.json
+          SYNC_PROVIDERS: ${{ inputs.providers || 'all' }}
+          BANK_CREDENTIALS: ${{ secrets.BANK_CREDENTIALS }}
+        run: node _engine/engine/scripts/sync-bank.mjs
+
+      - name: Save to your repo
+        if: always()
+        env:
+          DATA_FILE: ${{ github.workspace }}/data/budget.json
+        run: |
+          git config user.name "finance-bot"
+          git config user.email "finance-bot@users.noreply.github.com"
+          git add data/budget.json
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "עדכון עסקאות אוטומטי"
+          for i in 1 2 3; do
+            git push && exit 0
+            # the app saved meanwhile: take the latest data file and re-apply the scraped transactions on top
+            git fetch origin main
+            git reset --hard origin/main
+            node _engine/engine/scripts/sync-bank.mjs --apply-only
+            git add data/budget.json
+            git diff --cached --quiet && exit 0
+            git commit -m "עדכון עסקאות אוטומטי"
+          done
+          exit 1

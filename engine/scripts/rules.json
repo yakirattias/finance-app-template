@@ -1,0 +1,39 @@
+{
+  "_comment": "Auto-categorization rules, used by the app and by scripts/merge.mjs. Checked in order; first match wins. 'item' is a regex matched against budget item names inside the group.",
+  "rules": [
+    { "match": "כאל|ויזה|visa ?cal|ישראכרט|isracard|מקס איט|max it|לאומי קארד|אמריקן אקספרס|חיוב כרטיס|כרטיסי אשראי", "kind": "transfer", "sources": ["hapoalim", "leumi", "discount", "mercantile", "mizrahi", "beinleumi", "otsarHahayal", "massad", "yahav", "union", "pagi"] },
+    { "match": "משכורת|שכר|salary|payroll", "kind": "income", "sources": ["hapoalim", "leumi", "discount", "mercantile", "mizrahi", "beinleumi", "otsarHahayal", "massad", "yahav", "union", "pagi"] },
+    { "match": "העברת חיובים מחשבון לחשבון", "kind": "transfer" },
+
+    { "match": "barber|מספרה|ספר ", "group": "fixed", "item": "תספורת" },
+    { "match": "מכבידנט|שיניים|dental", "group": "fixed", "item": "שיניים" },
+    { "match": "איילון|ayalon", "group": "fixed", "item": "איילון" },
+    { "match": "מכבי", "group": "fixed", "item": "^מכבי$" },
+    { "match": "apple\\.com|icloud|itunes", "group": "fixed", "item": "icloud" },
+    { "match": "spotify", "group": "fixed", "item": "spotify" },
+    { "match": "keepsafe", "group": "fixed", "item": "keepsafe" },
+    { "match": "netflix|נטפליקס|hbomax|disney|youtube|google|chatgpt|openai|claude", "group": "fixed" },
+    { "match": "דמי כרטיס|פארם|super-?pharm|בית מרקחת", "group": "fixed" },
+
+    { "match": "ליברה|ביטוח רכב|הראל ביטוח|מגדל ביטוח|הפניקס ביטוח|ביטוח ישיר|aig", "group": "car", "item": "ביטוח" },
+    { "match": "טעינה חשמלית|סקאלה|אדגר|אדג'|edge|gnrgy|דלק|פז |סונול|דור אלון|ten |yellow|delek|tesla", "group": "car", "item": "דלק" },
+    { "match": "אגרת רישוי|רישיון רכב|רשות הרישוי|משרד התחבורה", "group": "car", "item": "רישוי" },
+    { "match": "חניון|חניונ|חניה|פנגו|pango|סלופארק|cellopark|כביש 6|נתיב מהיר|שטיפ|car ?wash|מוסך|צמיגים|טסט", "group": "car" },
+
+    { "match": "תמי ?4|tami", "group": "home", "item": "תמי" },
+    { "match": "חברת החשמל|תאגיד מים|מי אביבים|מי רמת גן|ארנונה|עיריית|פזגז|אמישראגז|סופרגז", "group": "home", "item": "חשמל" },
+    { "match": "סלקום|cellcom|פרטנר|partner|פלאפון|גולן טלקום|הוט |hot mobile|בזק|019|012", "group": "home", "item": "סלולר" },
+    { "match": "ועד בית", "group": "home", "item": "ועד" },
+
+    { "match": "חב\"ד|חבד|תרומ|הידברות|צדקה|קרן לב", "group": "giving" },
+
+    { "match": "wolt|וולט|תן ביס|10bis|סיבוס|cibus|משלוח", "group": "fun", "item": "מסעדות" },
+    { "match": "שופרסל|רמי לוי|ויקטורי|יוחננוף|טיב טעם|מגה |יינות ביתן|אושר עד|חצי חינם|קרפור|carrefour|am:?pm|אי אם פי אם|קצבי|מאפי|ירקות|פירות|מכולת|סופר(?! וואש)|super market", "group": "fun", "item": "סופר" },
+    { "match": "מסעד|קפה|cafe|coffee|starbucks|פיצ|בורגר|burger|סושי|sushi|חומוס|פלאפל|שווארמה|בר |בר$|פאב|מקדונלד|ארומה|גרג|רולדין|לנדוור|האחים|אוסקרס|דנדי|גמבינו|הפלח|וואקמה|מזנון|ביסטרו|grill|גריל|שיפודי", "group": "fun", "item": "מסעדות" },
+    { "match": "temu|aliexpress|amazon|shein|zara|זארה|h&m|uniqlo|lululemon|לולולמון|victoria|castro|קסטרו|fox|פוקס|אירוקה|ספורט|nike|adidas|playstation|steam|xbox|מתנות|קניון|ksp|באג|איקאה|ikea|ace|הום סנטר", "group": "fun", "item": "בילויים" },
+    { "match": "פאדל|טניס|כושר|gym|דוג'ו|dojo|הולמס|סינמה|יס פלאנט|cinema|הפקות|כרטיסים|eventim|לאן|זאפה|הופעה|נאייקס", "group": "fun", "item": "בילויים" },
+
+    { "match": "airways|airlines|airport|duty free|hotel|booking\\.com|airbnb|agoda|אל על|el al|ישראייר|ארקיע|wizz|ryanair|medical center", "group": "travel" }
+  ],
+  "foreignFallback": "travel"
+}
