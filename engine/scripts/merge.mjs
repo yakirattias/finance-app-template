@@ -17,6 +17,8 @@ export function categorize(data, cfg, t) {
   const key = Object.keys(learned).sort((a, b) => b.length - a.length).find((k) => d.includes(k));
   if (key) {
     const v = learned[key], g = typeof v === "string" ? v : v.group;
+    if (g === "income" && Number(t.amount) < 0) return { kind: "income", group: "income" };
+    if (g === "transfer") return { kind: "transfer", group: "transfer" };
     if (g === "other" || has(g)) return { group: g, item: typeof v === "object" && (data.budget || []).some((b) => b.id === v.item) ? v.item : undefined };
   }
   for (const r of cfg?.rules || []) {

@@ -118,3 +118,9 @@ test("bank rules apply to second accounts too (leumi-2)", () => {
   const d = data(); d.groups.push({ id: "fixed" });
   assert.equal(categorize(d, RULES_CFG, { desc: "משכורת", source: "leumi-2", amount: -9000 }).kind, "income");
 });
+
+test("learned income/transfer rules from the app (self-employed client payments)", () => {
+  const d = data(); d.settings = { rules: { "העברה מלקוח": "income", "העברה עצמית": "transfer" } };
+  assert.equal(categorize(d, RULES_CFG, { desc: "העברה מלקוח בע\"מ", source: "leumi", amount: -3500 }).kind, "income");
+  assert.equal(categorize(d, RULES_CFG, { desc: "העברה עצמית 123", source: "leumi", amount: -200 }).kind, "transfer");
+});
